@@ -7,7 +7,7 @@ import datetime
 
 def hash_password(password):
     return hmac.new(
-        os.environ.get('SECRET_KEY').encode(),
+        os.environ.get('HASH_SECRET').encode(),
         password.encode(),
         hashlib.sha256
     ).hexdigest()

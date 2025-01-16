@@ -9,11 +9,11 @@ from sqlalchemy import Column, Integer, String, Enum as SQLEnum, UniqueConstrain
 
 load_dotenv()
 
-USER = os.getenv('DB_USER')
-PASSWORD = os.getenv('DB_PASSWORD')
-HOST = os.getenv('DB_HOST')
-PORT = os.getenv('DB_PORT')
-DATABASE = os.getenv('DATABASE')
+USER = os.getenv('MYSQL_USER')
+PASSWORD = os.getenv('MYSQL_PASSWORD')
+HOST = os.getenv('MYSQL_HOST')
+PORT = os.getenv('MYSQL_PORT')
+DATABASE = os.getenv('MYSQL_DB')
 
 Base = declarative_base()
 

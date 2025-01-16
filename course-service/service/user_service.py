@@ -2,7 +2,7 @@ import requests
 
 
 def get_user_details(jwt):
-    url = "http://localhost:5002/api/v1/users/get-user-details"
+    url = "http://user-service:5000/api/v1/users/get-user-details"
 
     headers = {
         "Authorization": jwt
@@ -14,7 +14,7 @@ def get_user_details(jwt):
 
 
 def get_enrolled_courses(jwt):
-    url = "http://localhost:5002/api/v1/users/get-enrolled-courses"
+    url = "http://user-service:5000/api/v1/users/get-enrolled-courses"
 
     headers = {
         "Authorization": jwt

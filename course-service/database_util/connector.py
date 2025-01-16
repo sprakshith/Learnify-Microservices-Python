@@ -14,8 +14,7 @@ MONGO_DATABASE = os.environ.get("MONGO_DATABASE")
 
 
 def get_database():
-    # db_url = f"mongodb://{MONGO_USERNAME}:{MONGO_PW}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DATABASE}?authSource=admin"
-    db_url = "mongodb://localhost:27017/"
+    db_url = f"mongodb://{MONGO_USERNAME}:{MONGO_PW}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DATABASE}?authSource=admin"
     client = MongoClient(db_url)
 
     if MONGO_DATABASE not in client.list_database_names():

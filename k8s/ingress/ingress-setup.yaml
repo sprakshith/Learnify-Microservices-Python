@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: learnify-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: learnify.microservices
+      http:
+        paths:
+          - path: /api/v1/authentication
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 5000
+          - path: /api/v1/users
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 5000
+          - path: /api/v1/courses
+            pathType: Prefix
+            backend:
+              service:
+                name: course-service
+                port:
+                  number: 5000
+        # - path: /api/v1/notifications
+        #   pathType: Prefix
+        #   backend:
+        #     service:
+        #       name: notification-service
+        #       port:
+        #         number: 5000
