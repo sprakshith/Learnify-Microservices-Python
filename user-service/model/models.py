@@ -5,7 +5,7 @@ from enum import Enum as PyEnum
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Enum as SQLEnum
+from sqlalchemy import Column, Integer, String, Enum as SQLEnum, UniqueConstraint
 
 load_dotenv()
 
@@ -41,6 +41,8 @@ class Enrollment(Base):
     id = Column(Integer, primary_key=True)
     course_id = Column(String(50), nullable=False)
     student_id = Column(Integer, nullable=False)
+
+    __table_args__ = (UniqueConstraint('course_id', 'student_id', name='_course_student_uc'),)
 
 
 def initiate_database():
