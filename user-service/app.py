@@ -80,8 +80,6 @@ def has_role(role):
 
     session = get_session()
 
-    print(user_details)
-
     user = session.query(User).filter_by(email=user_details['username']).first()
 
     if user and user.role.value == role:
@@ -132,8 +130,6 @@ def enrol(course_id):
     if status != 200:
         return "Invalid Token!", 401
 
-    print(user_details)
-
     if not user_details['role'] == "STUDENT":
         return "Only students can enrol!", 401
 
@@ -172,4 +168,4 @@ def get_enrolled_courses():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5002, debug=True)
