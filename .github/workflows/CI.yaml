@@ -1,0 +1,61 @@
+name: Python Docker CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-user-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Build and Push Docker Image
+        run: |
+          cd user-service
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/learnify-p-user-service:latest .
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push ${{ secrets.DOCKER_USERNAME }}/learnify-p-user-service:latest
+
+  build-course-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Build and Push Docker Image
+        run: |
+          cd course-service
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/learnify-p-course-service:latest .
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push ${{ secrets.DOCKER_USERNAME }}/learnify-p-course-service:latest
+
+  build-notification-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Build and Push Docker Image
+        run: |
+          cd notification-service
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/learnify-p-notification-service:latest .
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push ${{ secrets.DOCKER_USERNAME }}/learnify-p-notification-service:latest
