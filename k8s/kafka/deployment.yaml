@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: akafka
+  template:
+    metadata:
+      labels:
+        app: akafka
+    spec:
+      containers:
+        - name: akafka
+          image: wurstmeister/kafka:latest
+          ports:
+            - containerPort: 9092
+          envFrom:
+            - configMapRef:
+                name: kafka-configmap

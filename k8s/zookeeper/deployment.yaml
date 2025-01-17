@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: wurstmeister/zookeeper:latest
+          ports:
+            - containerPort: 2181
+          env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: ZOOKEEPER_CLIENT_PORT
+                  name: zookeeper-config
+            - name: ZOOKEEPER_TICK_TIME
+              valueFrom:
+                configMapKeyRef:
+                  key: ZOOKEEPER_TICK_TIME
+                  name: zookeeper-config

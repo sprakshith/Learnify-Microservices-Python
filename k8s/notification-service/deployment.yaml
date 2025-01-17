@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  labels:
+    app: notification-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notification-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - name: notification-service
+          image: rakshith0908/learnify-p-notification-service:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: notification-service-configmap

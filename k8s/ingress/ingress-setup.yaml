@@ -32,10 +32,10 @@ spec:
                 name: course-service
                 port:
                   number: 5000
-        # - path: /api/v1/notifications
-        #   pathType: Prefix
-        #   backend:
-        #     service:
-        #       name: notification-service
-        #       port:
-        #         number: 5000
+          - path: /api/v1/notifications
+            pathType: Prefix
+            backend:
+              service:
+                name: notification-service
+                port:
+                  number: 5000
